@@ -1,0 +1,706 @@
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+:root {
+  --navbar-height: 64px;
+  --sidebar-width: 274px;
+  --sidebar-collapsed-width: 80px;
+
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+
+  --border-color: #e0e0e0;
+  --hover-color: #f1f3f4;
+  --mail-hover: #f2f6fc;
+
+  --compose-bg: #c2e7ff;
+  --compose-hover: #b3ddff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+
+  color: var(--text-primary);
+  background: #fff;
+
+  overflow: hidden;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+
+/* =========================================================
+   GENERIC ICON BUTTON
+   ========================================================= */
+
+.imgbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--text-secondary);
+
+  cursor: pointer;
+}
+
+.imgbutton:hover {
+  background: var(--hover-color);
+}
+
+.imgbutton:active {
+  background: #e8eaed;
+}
+
+.imgbutton:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+.imgbutton .icon {
+  display: block;
+
+  width: 24px;
+  height: 24px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+  position: fixed;
+  z-index: 10;
+
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: var(--navbar-height);
+
+  padding: 0 16px;
+
+  background: #fff;
+
+  border-bottom: 1px solid var(--border-color);
+}
+
+
+/* -------------------------
+   Navbar sections
+   ------------------------- */
+
+.navbar .left,
+.navbar .middle,
+.navbar .right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .left {
+  width: var(--sidebar-width);
+
+  flex-shrink: 0;
+}
+
+.navbar .middle {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.navbar .right {
+  gap: 4px;
+
+  margin-left: 16px;
+}
+
+
+/* =========================================================
+   HOME / LOGO
+   ========================================================= */
+
+.home {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  height: 48px;
+
+  padding: 0 12px;
+
+  color: #5f6368;
+
+  font-size: 22px;
+  font-weight: 400;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+}
+
+.home:hover {
+  color: #202124;
+}
+
+.home img {
+  display: block;
+
+  width: 32px;
+  height: 32px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.navbar .middle > div {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  max-width: 720px;
+  height: 48px;
+
+  padding: 0 8px;
+
+  background: #f1f3f4;
+
+  border-radius: 8px;
+}
+
+.navbar .middle > div:focus-within {
+  background: #fff;
+
+  box-shadow:
+    0 1px 2px rgba(60, 64, 67, 0.15),
+    0 1px 3px rgba(60, 64, 67, 0.1);
+}
+
+.navbar .middle input[type="text"] {
+  flex: 1;
+
+  min-width: 0;
+  height: 46px;
+
+  padding: 0 12px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: var(--text-primary);
+
+  font-size: 16px;
+}
+
+.navbar .middle input[type="text"]::placeholder {
+  color: var(--text-secondary);
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+  position: fixed;
+  z-index: 5;
+
+  top: var(--navbar-height);
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--navbar-height));
+
+  padding: 8px 12px;
+
+  background: #fff;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  transition:
+    width 0.2s ease,
+    padding 0.2s ease;
+}
+
+
+/* -------------------------
+   Collapsed sidebar
+   ------------------------- */
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+
+/* =========================================================
+   COMPOSE
+   ========================================================= */
+
+.sidebar > .compose {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 120px;
+  height: 56px;
+
+  margin-bottom: 8px;
+  padding: 0 16px;
+
+  border-radius: 16px;
+
+  background: var(--compose-bg);
+
+  color: var(--text-primary);
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.sidebar > .compose:hover {
+  background: var(--compose-hover);
+
+  box-shadow:
+    0 1px 2px rgba(60, 64, 67, 0.2),
+    0 1px 3px rgba(60, 64, 67, 0.1);
+}
+
+.sidebar > .compose .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar > .compose .text {
+  margin-left: 12px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   SIDEBAR FILTERS
+   ========================================================= */
+
+.filterlist {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  margin-bottom: 16px;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  height: 32px;
+
+  padding: 0 12px;
+
+  border: none;
+  border-radius: 0 16px 16px 0;
+
+  background: transparent;
+
+  color: var(--text-primary);
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.filter:hover {
+  background: var(--hover-color);
+}
+
+.filter .icon {
+  flex-shrink: 0;
+
+  width: 20px;
+  height: 20px;
+
+  object-fit: contain;
+}
+
+.filter .body {
+  width: 100%;
+  display: flex;
+  flex: 1, 1, 0;
+}
+
+.filter .text {
+  margin-left: 18px;
+  margin-right: auto;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filter .count {
+  padding-left: 16px;
+  margin-left: auto;
+}
+
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+.labeltitle {
+  display: flex;
+  align-items: center;
+
+  min-height: 40px;
+
+  padding: 0 12px;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.labeltitle > div {
+  white-space: nowrap;
+}
+
+.labeltitle > .imgbutton {
+  width: 32px;
+  height: 32px;
+
+  margin-left: auto;
+}
+
+.labeltitle > .imgbutton .icon {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* -------------------------
+   Label list
+   ------------------------- */
+
+.labellist {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  min-height: 32px;
+
+  padding: 0 12px;
+
+  border: none;
+  border-radius: 0 16px 16px 0;
+
+  background: transparent;
+
+  color: var(--text-primary);
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.label:hover {
+  background: var(--hover-color);
+}
+
+.label .icon {
+  flex-shrink: 0;
+
+  width: 20px;
+  height: 20px;
+}
+
+.label .text {
+  margin-left: 18px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   COLLAPSED SIDEBAR
+   ========================================================= */
+
+/*
+   Hide text when sidebar is collapsed.
+*/
+
+.sidebar.collapsed .text,
+.sidebar.collapsed .body {
+  display: none;
+}
+
+
+/*
+   Center icons when collapsed.
+*/
+
+.sidebar.collapsed .compose,
+.sidebar.collapsed .filter,
+.sidebar.collapsed .label {
+  justify-content: center;
+
+  width: 56px;
+
+  padding-left: 0;
+}
+
+.sidebar.collapsed .compose {
+  width: 56px;
+  height: 56px;
+
+  padding: 0;
+
+  border-radius: 16px;
+}
+
+.sidebar.collapsed .compose .icon {
+  width: 24px;
+  height: 24px;
+}
+
+
+/*
+   Hide the "Labels" heading when collapsed.
+*/
+
+.sidebar.collapsed .labeltitle > div {
+  display: none;
+}
+
+.sidebar.collapsed .labeltitle {
+  justify-content: center;
+
+  padding-left: 0;
+}
+
+.sidebar.collapsed .labeltitle > .imgbutton {
+  margin-left: 0;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.content-general {
+  position: fixed;
+
+  top: var(--navbar-height);
+  right: 0;
+  bottom: 0;
+  left: var(--sidebar-width);
+
+  display: flex;
+
+  padding: 8px 16px 16px 0;
+
+  overflow: hidden;
+
+  transition: left 0.2s ease;
+}
+
+
+/*
+   When the sidebar is collapsed, move content left.
+*/
+
+.sidebar.collapsed ~ .content-general {
+  left: calc(var(--sidebar-collapsed-width));
+}
+
+
+/* =========================================================
+   MAIL LIST
+   ========================================================= */
+
+.maillist {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  background: #fff;
+}
+
+
+/* =========================================================
+   MAIL ROW
+   ========================================================= */
+
+.mail {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 40px;
+
+  padding: 0 12px;
+
+  border-bottom: 1px solid #f1f3f4;
+
+  overflow: hidden;
+
+  background: #fff;
+
+  cursor: pointer;
+}
+
+.mail .actions {
+  display: none;
+}
+
+.mail:hover {
+  position: relative;
+  z-index: 1;
+
+  background: var(--mail-hover);
+
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.2);
+}
+
+.mail:hover .date {
+  display: none;
+}
+
+.mail:hover .actions {
+  display: flex;
+  flex-direction: row;
+}
+
+/* -------------------------
+   Mail buttons
+   ------------------------- */
+
+.mail input[type="button"] {
+  flex-shrink: 0;
+
+  min-width: 40px;
+  height: 40px;
+
+  padding: 0 8px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--text-secondary);
+
+  cursor: pointer;
+}
+
+.mail input[type="button"]:hover {
+  background: #e8eaed;
+}
+
+
+/* -------------------------
+   Mail preview
+   ------------------------- */
+
+.mail > .preview {
+  flex: 1;
+
+  min-width: 0;
+
+  padding-left: 12px;
+
+  color: var(--text-secondary);
+
+  white-space: nowrap;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #dadce0;
+
+  border-radius: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #bdc1c6;
+}
