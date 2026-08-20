@@ -1,8 +1,8 @@
 import Mail from './Mail/Mail';
 
-const MailList = () => {
+const MailList = ({ mails }) => {
   return <div className="maillist">
-    <Mail starred={false} important={false} date={Date.now()} />
+    {mails.map((m) => <Mail {...m} />)}
   </div>;
 };
 

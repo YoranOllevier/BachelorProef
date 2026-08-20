@@ -7,16 +7,16 @@ const Sidebar = ({ isOpen }) => {
   const [isHover, setIsHover] = useState(false);
   const [fltrIsExp, setFltrIsExp] = useState(false);
 
-  return <div className={`sidebar ${isHover || isOpen ? '' : 'collapsed'}`}
+  return <div className={`sidebar${isHover || isOpen ? '' : ' collapsed'}`}
     onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-    <ImgButton svg='../../../../compose.png' className='compose' alt='compose'>
+    <ImgButton svg='/compose.png' className='compose' alt='compose'>
       <div className='text'>Compose</div>
     </ImgButton>
     <FilterList isExpanded={fltrIsExp} setIsExpanded={setFltrIsExp} />
     <div>
       <div className='labeltitle'>
         <div>Labels</div>
-        <ImgButton svg={'../../../../add.png'} />
+        <ImgButton svg={'/add.png'} />
       </div>
       <LabelList />
     </div>
